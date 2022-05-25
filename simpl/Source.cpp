@@ -39,10 +39,6 @@ public:
 		size = other.size;
 		other.size = 0;
 		swap(capacity, other.capacity);
-
-
-
-
 	}
 
 	~String() {
@@ -84,9 +80,6 @@ private:
 	char *data;
 	int size;
 	int capacity;
-
-	
-
 };
 void Foo(String obj) {
 
@@ -115,3 +108,4 @@ int main() {
 	system("pause>null");
 	return 0;
 }
+ 

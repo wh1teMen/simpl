@@ -13,6 +13,66 @@ public:
 		capacity = 0;*/
 		cout<<this<< " Base object created\n";
 	};
+	String(std::string str) :String() {
+		size = str.size();
+		capacity = size;
+		data = new char[size]{};
+		for (int i = 0; i < size; i++) {
+			data[i]=str[i];
+		}
+	}
+	bool operator== (const String &&other) {
+		if (this->size != other.size) return false;
+		if (this->size == other.size) {
+			for (int i = 0; i < this->size; i++) {
+				if (this->data[i] != other.data[i]) return false;
+			}
+			 return true;
+			
+		}
+	}
+	bool operator!= (const String &&other) {
+		if (this->size == other.size) return false;
+		if (this->size == other.size) {
+			for (int i = 0; i < this->size; i++) {
+				if (this->data[i] == other.data[i]) return false;
+			}
+			return true;
+		}
+	}
+	
+
+	friend String operator+=(String a, String b) {
+		String result(a.size + b.size);
+		::memcpy(result.data, a.data, a.size);
+		::memcpy(result.data + a.size, b.data, b.size);
+		result.size = a.size + b.size;
+		return result;
+	}
+
+
+
+	//	if ( capcity= other.size) {
+	//		for (int i = 0; i < size; i++) {
+	//			data[i] = '\0';
+	//		}
+	//	}
+	//	else
+	//	{
+	//		if (data) {
+	//			delete[]data;
+	//		}
+	//		data=new char[other.size + 1];
+	//		capacity = other.size + 1;
+	//	}
+	//	size = other.size;
+	//	::memcpy(data, other.data, size);
+	//	//процесс копирования
+	//	return *this;
+
+
+	
+	
 	explicit String(int lenght) :String() {
 		capacity = lenght;
 		data = new char[lenght] {};// {} - чтобы заполниь нулями
@@ -76,6 +136,9 @@ public:
 	friend String operator+(String a, String b);
 
 
+
+	
+
 private:
 	char *data;
 	int size;
@@ -84,13 +147,23 @@ private:
 void Foo(String obj) {
 
 }
- String operator+(String a, String b) {
-	 String result(a.size + b.size);
-	 ::memcpy(result.data, a.data, a.size);
-	 ::memcpy(result.data + a.size, b.data, b.size);
-	 result.size = a.size + b.size;
-	 return result;
+
+String operator+(String a, String b) {
+	String result(a.size + b.size);
+	::memcpy(result.data, a.data, a.size);
+	::memcpy(result.data + a.size, b.data, b.size);
+	result.size = a.size + b.size;
+	return result;
 }
+String operator+=(String a, String b) {
+	String result(a.size + b.size);
+	::memcpy(result.data, a.data, a.size);
+	::memcpy(result.data + a.size, b.data, b.size);
+	result.size = a.size + b.size;
+	return result;
+}
+
+ 
 
 
 int main() {
